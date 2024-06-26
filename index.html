@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift與iOS App開發之旅</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            perspective: 500px;
+        }
+        .star-wars {
+            color: #feda4a;
+            font-size: 500%;
+            font-weight: bold;
+            text-align: justify;
+            position: relative;
+            transform: rotateX(20deg);
+            animation: crawl 60s linear infinite;
+        }
+        @keyframes crawl {
+            0% {
+                top: 100%;
+                transform: translateZ(0) rotateX(20deg);
+            }
+            100% {
+                top: -200%;
+                transform: translateZ(-2000px) rotateX(25deg);
+            }
+        }
+        .fade {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(0deg, transparent, black 75%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="fade"></div>
+    <div class="star-wars">
+        <p>Swift與iOS App開發之旅</p>
+        <p>第一章：Swift的崛起</p>
+        <p>在遙遠的科技銀河中，一場編程革命正在醞釀。Apple公司釋放了強大的Swift語言，為iOS開發帶來了新的希望。</p>
+        <p>年輕的開發者們紛紛響應號召，踏上了學習Swift的征程。他們將面對語法的挑戰，征服框架的難關，最終掌握創造驚人App的力量。</p>
+        <p>然而，黑暗面的誘惑無處不在。程式碼錯誤、記憶體洩漏和用戶界面的混亂威脅著每一個開發者。只有真正掌握Swift之道的人，才能在這場編程銀河的戰役中取得勝利......</p>
+        <p>現在，你的旅程即將開始。準備好迎接挑戰，掌握Swift的力量，成為iOS開發的絕地大師了嗎？</p>
+        <p>願程式碼與你同在！</p>
+    </div>
+</body>
+</html>
