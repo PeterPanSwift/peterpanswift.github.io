@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby 類別 3D 旋轉立方體圖表</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff;
+            perspective: 1000px;
+        }
+        .scene {
+            width: 200px;
+            height: 200px;
+            perspective: 600px;
+        }
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+        .cube__face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 10px;
+            box-sizing: border-box;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0.8;
+        }
+        .cube__face--front  { background: #FF9AA2; transform: rotateY(  0deg) translateZ(100px); }
+        .cube__face--right  { background: #FFDAC1; transform: rotateY( 90deg) translateZ(100px); }
+        .cube__face--back   { background: #FFB7B2; transform: rotateY(180deg) translateZ(100px); }
+        .cube__face--left   { background: #E2F0CB; transform: rotateY(-90deg) translateZ(100px); }
+        .cube__face--top    { background: #B5EAD7; transform: rotateX( 90deg) translateZ(100px); }
+        .cube__face--bottom { background: #C7CEEA; transform: rotateX(-90deg) translateZ(100px); }
+        .class-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .content {
+            font-size: 14px;
+        }
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4682b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="cube">
+            <div class="cube__face cube__face--front">
+                <div class="class-name">Baby</div>
+                <div class="content">類別定義</div>
+            </div>
+            <div class="cube__face cube__face--back">
+                <div class="class-name">方法</div>
+                <div class="content">sleep(hour: Int, min: Int): void</div>
+            </div>
+            <div class="cube__face cube__face--right">
+                <div class="class-name">屬性</div>
+                <div class="content">
+                    age: Int = 1<br>
+                    name: String = "peter"
+                </div>
+            </div>
+            <div class="cube__face cube__face--left">
+                <div class="class-name">相關資訊</div>
+                <div class="content">嬰兒類別<br>描述基本嬰兒特徵</div>
+            </div>
+            <div class="cube__face cube__face--top">
+                <div class="class-name">父類別</div>
+                <div class="content">Object</div>
+            </div>
+            <div class="cube__face cube__face--bottom">
+                <div class="class-name">子類別</div>
+                <div class="content">無</div>
+            </div>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="rotateX">旋轉 X</button>
+        <button id="rotateY">旋轉 Y</button>
+        <button id="auto">自動旋轉</button>
+    </div>
+
+    <script>
+        let cube = document.querySelector('.cube');
+        let rotateX = 0, rotateY = 0;
+        let autoRotate = false;
+
+        function updateRotation() {
+            cube.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }
+
+        document.getElementById('rotateX').addEventListener('click', () => {
+            rotateX += 90;
+            updateRotation();
+        });
+
+        document.getElementById('rotateY').addEventListener('click', () => {
+            rotateY += 90;
+            updateRotation();
+        });
+
+        document.getElementById('auto').addEventListener('click', () => {
+            autoRotate = !autoRotate;
+            if (autoRotate) {
+                autoRotateAnimation();
+            }
+        });
+
+        function autoRotateAnimation() {
+            if (autoRotate) {
+                rotateY += 1;
+                updateRotation();
+                requestAnimationFrame(autoRotateAnimation);
+            }
+        }
+
+        // 滑鼠拖動旋轉
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+
+        document.addEventListener('mousedown', (e) => {
+            isDragging = true;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                let deltaMove = {
+                    x: e.clientX - previousMousePosition.x,
+                    y: e.clientY - previousMousePosition.y
+                };
+                rotateY += deltaMove.x * 0.5;
+                rotateX -= deltaMove.y * 0.5;
+                updateRotation();
+            }
+            previousMousePosition = {
+                x: e.clientX,
+                y: e.clientY
+            };
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            isDragging = false;
+        });
+    </script>
+</body>
+</html>
