@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小朋友的 Swift 冒險之旅！</title>
+    <style>
+        body {
+            font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+            background-color: #F0F8FF;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #FF6B6B;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+        h2 {
+            color: #4ECDC4;
+            font-size: 1.8em;
+            margin-top: 30px;
+        }
+        .fun-fact {
+            background-color: #FFD93D;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+        .fun-fact:hover {
+            transform: scale(1.05);
+        }
+        .code-example {
+            background-color: #F4F4F4;
+            border-left: 5px solid #4ECDC4;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 0.9em;
+            position: relative;
+            overflow: hidden;
+        }
+        .code-example::after {
+            content: '🚀';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 2em;
+            animation: fly 5s infinite linear;
+        }
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+            display: inline-block;
+            animation: wiggle 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+        @keyframes fly {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-400px, 400px) rotate(360deg); }
+        }
+        .swift-bird {
+            width: 50px;
+            height: 50px;
+            background-color: #FF6B6B;
+            clip-path: polygon(0% 35%, 100% 0%, 100% 100%, 0% 65%);
+            animation: fly-bird 10s infinite linear;
+            position: absolute;
+        }
+        @keyframes fly-bird {
+            0% { transform: translate(-50px, 50px) rotate(0deg); }
+            25% { transform: translate(200px, 100px) rotate(15deg); }
+            50% { transform: translate(400px, 0px) rotate(0deg); }
+            75% { transform: translate(200px, -100px) rotate(-15deg); }
+            100% { transform: translate(-50px, 50px) rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="swift-bird"></div>
+    <div class="container">
+        <h1>🚀 小朋友的 Swift 冒險之旅！</h1>
+        
+        <h2><span class="emoji">🍎</span>什麼是 Swift？</h2>
+        <p>Swift 是一種超級酷的程式語言！它就像是一種魔法，可以讓你創造出奇妙的 iPhone 和 iPad 應用程式。</p>
+        
+        <div class="fun-fact">
+            <strong>有趣的事實：</strong> Swift 的標誌是一隻飛快的小鳥，因為 Swift 這個字的意思就是「快速」！
+        </div>
+        
+        <h2><span class="emoji">🎨</span>用 Swift 畫畫</h2>
+        <p>想像一下，你可以用 Swift 來畫畫！你可以創造各種形狀、顏色，甚至是動畫！</p>
+        
+        <div class="code-example">
+            // 這是一個畫圓形的例子
+            let circle = UIView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
+            circle.backgroundColor = .red
+            circle.layer.cornerRadius = 50
+            view.addSubview(circle)
+        </div>
+        
+        <h2><span class="emoji">🎮</span>製作自己的遊戲</h2>
+        <p>使用 Swift，你可以創造出自己的遊戲！想像一下，你可以設計出一個太空冒險或是一個可愛的寵物照顧遊戲。</p>
+        
+        <h2><span class="emoji">🌈</span>為什麼學習 Swift 很棒？</h2>
+        <ul>
+            <li>你可以創造出自己的 App</li>
+            <li>它很有趣，就像解謎遊戲</li>
+            <li>你可以和朋友分享你的作品</li>
+            <li>它能幫助你更好地理解科技</li>
+        </ul>
+        
+        <div class="fun-fact">
+            <strong>小提示：</strong> 記住，每個偉大的程式設計師都是從小小的步伐開始的。慢慢來，保持好奇心，你一定會成功的！
+        </div>
+    </div>
+</body>
+</html>
