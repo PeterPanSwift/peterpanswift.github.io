@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UIKit Tab Bar Controller vs Navigation Controller (Animated)</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; line-height: 1.6; background-color: #f0f0f0; margin: 0; padding: 20px; }
+        .container { display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
+        .controller { width: 45%; min-width: 300px; background-color: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h2 { text-align: center; color: #333; margin-top: 0; }
+        .screen { height: 500px; background-color: #f8f8f8; border-radius: 30px; overflow: hidden; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .nav-bar { height: 60px; background-color: #007AFF; color: white; display: flex; align-items: center; padding: 0 15px; }
+        .content { padding: 20px; height: calc(100% - 100px); overflow-y: auto; }
+        .tab-bar { height: 70px; background-color: #f8f8f8; border-top: 1px solid #e0e0e0; position: absolute; bottom: 0; width: 100%; display: flex; justify-content: space-around; align-items: center; }
+        .tab { width: 60px; height: 50px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #007AFF; font-size: 10px; cursor: pointer; }
+        .tab-icon { width: 25px; height: 25px; background-color: #007AFF; border-radius: 50%; margin-bottom: 5px; }
+        .back-button { width: 80px; height: 30px; background-color: rgba(255,255,255,0.2); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 14px; cursor: pointer; }
+        .title { flex-grow: 1; text-align: center; font-size: 18px; font-weight: bold; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        .tab-content { position: absolute; top: 0; left: 0; width: 100%; height: calc(100% - 70px); background-color: #f8f8f8; transition: transform 0.3s ease-in-out; }
+        .tab-content:not(.active) { transform: translateX(100%); }
+        .tab-content.active { transform: translateX(0); }
+        .nav-content { position: absolute; top: 60px; left: 0; width: 100%; height: calc(100% - 60px); background-color: #f8f8f8; transition: transform 0.3s ease-in-out; }
+        .nav-content:not(.active) { transform: translateX(100%); }
+        .nav-content.active { transform: translateX(0); }
+        .button { background-color: #007AFF; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+        @media (max-width: 768px) {
+            .controller { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tab Bar Controller section remains unchanged -->
+        <div class="controller">
+            <h2>Tab Bar Controller</h2>
+            <div class="screen">
+                <div class="tab-content active" id="tab1">
+                    <div class="content">
+                        <h3>首頁</h3>
+                        <p>這是應用的首頁。用戶可以在這裡看到概覽信息。</p>
+                    </div>
+                </div>
+                <div class="tab-content" id="tab2">
+                    <div class="content">
+                        <h3>搜尋</h3>
+                        <p>這是搜尋頁面。用戶可以在這裡搜尋特定內容。</p>
+                    </div>
+                </div>
+                <div class="tab-content" id="tab3">
+                    <div class="content">
+                        <h3>設定</h3>
+                        <p>這是設定頁面。用戶可以在這裡調整應用設置。</p>
+                    </div>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab" onclick="switchTab('tab1')"><div class="tab-icon"></div>首頁</div>
+                    <div class="tab" onclick="switchTab('tab2')"><div class="tab-icon"></div>搜尋</div>
+                    <div class="tab" onclick="switchTab('tab3')"><div class="tab-icon"></div>設定</div>
+                </div>
+            </div>
+            <h3>特點：</h3>
+            <ul>
+                <li>底部有固定的標籤欄，用於快速切換主要功能</li>
+                <li>適合平行的導航結構，如應用程式的不同主要部分</li>
+                <li>允許用戶快速訪問應用的核心功能</li>
+                <li>通常用於應用的最頂層導航</li>
+            </ul>
+        </div>
+        <!-- Updated Navigation Controller section -->
+        <div class="controller">
+            <h2>Navigation Controller</h2>
+            <div class="screen">
+                <div class="nav-bar">
+                    <div class="back-button" onclick="navigateBack()" style="display: none;">返回</div>
+                    <div class="title">列表</div>
+                </div>
+                <div class="nav-content active" id="list">
+                    <div class="content">
+                        <h3>項目列表</h3>
+                        <p>這是主列表視圖。點擊下面的按鈕以導航到詳細信息頁面。</p>
+                        <button class="button" onclick="navigateTo('detail')">查看詳情</button>
+                    </div>
+                </div>
+                <div class="nav-content" id="detail">
+                    <div class="content">
+                        <h3>詳細信息</h3>
+                        <p>這是詳細信息頁面。你可以看到更多關於所選項目的信息。</p>
+                        <p>點擊頂部的"返回"按鈕來回到列表視圖。</p>
+                    </div>
+                </div>
+            </div>
+            <h3>特點：</h3>
+            <ul>
+                <li>頂部有導航欄，顯示當前位置和返回按鈕（除了根視圖）</li>
+                <li>適合層級式的導航結構，允許深入探索內容</li>
+                <li>使用推送和彈出機制來管理視圖堆疊</li>
+                <li>為用戶提供清晰的導航路徑和返回機制</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function navigateTo(viewId) {
+            document.querySelectorAll('.nav-content').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById(viewId).classList.add('active');
+            document.querySelector('.nav-bar .title').textContent = viewId === 'detail' ? '詳細信息' : '列表';
+            document.querySelector('.back-button').style.display = viewId === 'detail' ? 'flex' : 'none';
+        }
+
+        function navigateBack() {
+            navigateTo('list');
+        }
+    </script>
+</body>
+</html>
