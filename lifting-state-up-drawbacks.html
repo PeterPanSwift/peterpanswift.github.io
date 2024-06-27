@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lifting State Up 缺點圖示（活潑版）</title>
+    <title>Lifting State Up 缺點圖示（修正版）</title>
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -96,6 +96,11 @@
             color: #7f8c8d;
             animation: swing 2s infinite;
         }
+        .call {
+            font-weight: bold;
+            color: #e67e22;
+            animation: pulse 2s infinite;
+        }
         @keyframes rainbow {
             0% { color: #ff0000; }
             14% { color: #ff7f00; }
@@ -118,6 +123,10 @@
         @keyframes swing {
             0%, 100% { transform: rotate(0); }
             50% { transform: rotate(15deg); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         @media (max-width: 1024px) {
             .drawback {
@@ -162,6 +171,7 @@
                     <div class="arrow">↓</div>
                     <div class="component grandchild">
                         孫組件
+                        <div class="call">呼叫 callback function! 📞📱</div>
                     </div>
                 </div>
             </div>
