@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifting State Up 缺點圖示（活潑版）</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            animation: rainbow 5s infinite;
+        }
+        .drawback {
+            width: 30%;
+            min-width: 300px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            animation: wobble 5s infinite;
+            transition: all 0.3s ease;
+        }
+        .drawback:hover {
+            transform: scale(1.05);
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 3px dotted #3498db;
+            padding-bottom: 10px;
+        }
+        .component {
+            border: 3px solid #34495e;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+            transition: all 0.3s ease;
+            background-color: #ecf0f1;
+        }
+        .component::before {
+            content: '😊';
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            font-size: 24px;
+        }
+        .child { 
+            background-color: #e8f6f3;
+            margin-left: 30px;
+        }
+        .child::before {
+            content: '😄';
+        }
+        .grandchild { 
+            background-color: #e8f0fe;
+            margin-left: 60px;
+        }
+        .grandchild::before {
+            content: '😃';
+        }
+        .state, .callback {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9em;
+            animation: bounce 2s infinite;
+        }
+        .state { 
+            background-color: #e74c3c;
+            color: white;
+        }
+        .callback { 
+            background-color: #3498db;
+            color: white;
+        }
+        .arrow {
+            text-align: center;
+            font-size: 30px;
+            color: #7f8c8d;
+            animation: swing 2s infinite;
+        }
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            14% { color: #ff7f00; }
+            28% { color: #ffff00; }
+            42% { color: #00ff00; }
+            57% { color: #0000ff; }
+            71% { color: #8b00ff; }
+            85% { color: #ff00ff; }
+            100% { color: #ff0000; }
+        }
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes swing {
+            0%, 100% { transform: rotate(0); }
+            50% { transform: rotate(15deg); }
+        }
+        @media (max-width: 1024px) {
+            .drawback {
+                width: 45%;
+            }
+        }
+        @media (max-width: 768px) {
+            .drawback {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Lifting State Up 的三大缺點</h1>
+    <div class="container">
+        <div class="drawback">
+            <h2>1. 父組件存儲過多狀態 🎒</h2>
+            <div class="component parent">
+                父組件
+                <div class="state">狀態1 📦</div>
+                <div class="state">狀態2 📦</div>
+                <div class="state">狀態3 📦</div>
+                <div class="state">... 📦</div>
+                <div class="component child">
+                    子組件1
+                </div>
+                <div class="component child">
+                    子組件2
+                </div>
+            </div>
+        </div>
+        <div class="drawback">
+            <h2>2. 多層傳遞 callback function 📞</h2>
+            <div class="component parent">
+                父組件
+                <div class="callback">callback function 📞</div>
+                <div class="arrow">↓</div>
+                <div class="component child">
+                    子組件
+                    <div class="callback">callback function 📞</div>
+                    <div class="arrow">↓</div>
+                    <div class="component grandchild">
+                        孫組件
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="drawback">
+            <h2>3. 多層傳遞狀態 🚀</h2>
+            <div class="component parent">
+                父組件
+                <div class="state">狀態 🎁</div>
+                <div class="arrow">↓</div>
+                <div class="component child">
+                    子組件
+                    <div class="state">狀態（未使用）🎁</div>
+                    <div class="arrow">↓</div>
+                    <div class="component grandchild">
+                        孫組件
+                        <div class="state">狀態（使用）🎁</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
