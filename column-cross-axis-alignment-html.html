@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Column CrossAxisAlignment 示例</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .column {
+            width: 200px;
+            height: 300px;
+            background-color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #333;
+        }
+        .widget {
+            padding: 10px;
+            margin: 5px;
+            color: white;
+            text-align: center;
+        }
+        .widget-1 { background-color: #ff9999; width: 50px; }
+        .widget-2 { background-color: #99ff99; width: 100px; }
+        .widget-3 { background-color: #9999ff; width: 150px; }
+        .title {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        #controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Column CrossAxisAlignment 示例</h1>
+        <div id="controls">
+            <button onclick="setAlignment('flex-start')">Start</button>
+            <button onclick="setAlignment('center')">Center</button>
+            <button onclick="setAlignment('flex-end')">End</button>
+            <button onclick="setAlignment('stretch')">Stretch</button>
+        </div>
+        <h2 id="currentAlignment">當前對齊: Start</h2>
+        <div id="column" class="column" style="align-items: flex-start;">
+            <div class="widget widget-1">Widget 1</div>
+            <div class="widget widget-2">Widget 2</div>
+            <div class="widget widget-3">Widget 3</div>
+        </div>
+    </div>
+
+    <script>
+        function setAlignment(alignment) {
+            const column = document.getElementById('column');
+            const currentAlignment = document.getElementById('currentAlignment');
+            column.style.alignItems = alignment;
+            
+            let alignmentText = alignment;
+            if (alignment === 'flex-start') alignmentText = 'Start';
+            if (alignment === 'flex-end') alignmentText = 'End';
+            currentAlignment.textContent = `當前對齊: ${alignmentText}`;
+
+            if (alignment === 'stretch') {
+                column.querySelectorAll('.widget').forEach(widget => {
+                    widget.style.width = 'auto';
+                });
+            } else {
+                column.querySelectorAll('.widget').forEach((widget, index) => {
+                    widget.style.width = `${50 * (index + 1)}px`;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
