@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift 函數說明</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffcc99;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ff9966;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .code {
+            font-family: 'Menlo', 'Courier New', monospace;
+            font-size: 18px;
+            background-color: #292d3e;
+            color: #d0d0d0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .highlight {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .highlight:hover {
+            background-color: #444867;
+        }
+        .tooltip {
+            visibility: hidden;
+            background-color: #ff6b6b;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .highlight:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .keyword { color: #ff5370; }
+        .type { color: #ffcb6b; }
+        .function { color: #82aaff; }
+        .parameter { color: #f78c6c; }
+        .operator { color: #89ddff; }
+        .decoration {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ffd700;
+        }
+        #dec1 { top: 10px; right: 10px; }
+        #dec2 { bottom: 10px; left: 10px; }
+        .smiley {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="code">
+            <span class="highlight"><span class="keyword">func</span><span class="tooltip">函數關鍵字</span></span> 
+            <span class="highlight"><span class="function">addNumbers</span><span class="tooltip">函數名稱</span></span>
+            (<span class="highlight"><span class="parameter">number1</span>: <span class="type">Int</span><span class="tooltip">參數1</span></span>, 
+            <span class="highlight"><span class="parameter">number2</span>: <span class="type">Int</span><span class="tooltip">參數2</span></span>) 
+            <span class="operator">-></span> <span class="highlight"><span class="type">Int</span><span class="tooltip">返回類型</span></span> {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight"><span class="keyword">return</span> number1 <span class="operator">+</span> number2<span class="tooltip">返回語句</span></span><br>
+            }
+        </div>
+        <div class="decoration" id="dec1"></div>
+        <div class="decoration" id="dec2"></div>
+        <div class="smiley">😊</div>
+    </div>
+</body>
+</html>
