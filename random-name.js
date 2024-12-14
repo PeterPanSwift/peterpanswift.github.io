@@ -1,0 +1,2 @@
+const names = ["Alex", "Ben", "Chris", "David", "Emma"];
+document.write(names[Math.floor(Math.random() * names.length)]);
