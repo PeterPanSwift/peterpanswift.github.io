@@ -1,40 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>隨機名字產生器</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-    }
-    #nameDisplay {
-      font-size: 24px;
-      margin-top: 20px;
-      color: #007bff;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>隨機名字產生器</h1>
-  <button onclick="generateRandomName()">生成名字</button>
-  <p id="nameDisplay"></p>
-
-  <script>
-    const names = ["小明", "小花", "阿文", "阿婷", "小強", "小美", "Peter", "Anne"];
-
-    function generateRandomName() {
-      const randomIndex = Math.floor(Math.random() * names.length);
-      document.getElementById("nameDisplay").textContent = names[randomIndex];
-    }
-  </script>
-
-</body>
-</html>
+<script>
+const names = ["Alex", "Ben", "Chris", "David", "Emma"];
+document.write(names[Math.floor(Math.random() * names.length)]);
+</script>
