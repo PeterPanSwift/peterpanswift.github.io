@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+      (function() {
+        const originalConsole = window.console;
+        window.console = {
+          log: (...args) => {
+            originalConsole.log(...args);
+            window.parent.postMessage({ type: 'console', message: args.join(' ') }, '*');
+          },
+          error: (...args) => {
+            originalConsole.error(...args);
+            window.parent.postMessage({ type: 'console', message: 'Error: ' + args.join(' ') }, '*');
+          },
+          warn: (...args) => {
+            originalConsole.warn(...args);
+            window.parent.postMessage({ type: 'console', message: 'Warning: ' + args.join(' ') }, '*');
+          }
+        };
+
+        window.addEventListener('error', (event) => {
+          window.parent.postMessage({ type: 'console', message: 'Uncaught Error: ' + event.message }, '*');
+        });
+      })();
+    </script>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute iOS and iPadOS Device Dimensions</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #ffd9e8;
+            color: #444;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #ffd9e8;
+        }
+        th {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        tr:nth-child(even) {
+            background-color: #fff0f5;
+        }
+        tr:hover {
+            background-color: #ffe4e1;
+            transition: background-color 0.3s ease;
+        }
+        .device-icon {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .size {
+            font-family: 'Courier New', monospace;
+            background-color: #f0f8ff;
+            padding: 3px 6px;
+            border-radius: 5px;
+            border: 1px solid #add8e6;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Device Name</th>
+                <th>Screen Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><span class="device-icon">📱</span>12.9" iPad Pro</td><td><span class="size">1024x1366</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>11" iPad Pro, 10.5" iPad Pro</td><td><span class="size">834x1194</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>10.9" iPad Air</td><td><span class="size">820x1180</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>10.5" iPad Air</td><td><span class="size">834x1112</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>10.2" iPad</td><td><span class="size">810x1080</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>9.7" iPad Pro, 9.7" iPad Air, 9.7" iPad, 7.9" iPad mini</td><td><span class="size">768x1024</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>8.3" iPad mini</td><td><span class="size">744x1133</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>iPhone 16 Pro Max</td><td><span class="size">440x956</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>iPhone 16 Pro</td><td><span class="size">402x874</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>iPhone 16 Plus, 15 Pro Max, 15 Plus, 14 Pro Max</td><td><span class="size">430x932</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>iPhone 16, 15 Pro, 15, 14 Pro</td><td><span class="size">393x852</span></td></tr>
+		 <tr><td><span class="device-icon">📱</span>iPhone 16e, 14, 13 Pro, 13, 12 Pro, 12</td><td><span class="size">390x844</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>iPhone 14 Plus, 13 Pro Max, 12 Pro Max</td><td><span class="size">428x926</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>iPhone 13 mini, 12 mini, 11 Pro, XS, X</td><td><span class="size">375x812</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>iPhone 11 Pro Max, 11, XS Max, XR</td><td><span class="size">414x896</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>iPhone 8 Plus, 7 Plus, 6s Plus, 6 Plus</td><td><span class="size">414x736</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>iPhone 8, 7, 6s, 6, 4.7" iPhone SE</td><td><span class="size">375x667</span></td></tr>
+            <tr><td><span class="device-icon">📱</span>4" iPhone SE, iPod touch 5th generation and later</td><td><span class="size">320x568</span></td></tr>
+        </tbody>
+    </table>
+</body>
+</html>
